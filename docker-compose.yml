@@ -1,0 +1,14 @@
+version: "3"
+services:
+  fake-smtp-server:
+    image: crisnao2/fake-smtp-server
+    restart: always
+    # volumes: # required if use one file fakesmtp.properties to config fakesmtp, see the attribute command below
+    # - ${PWD}:/data
+    ports:
+      - "5025:5025"
+      - "5080:5080"
+      - "5081:5081"
+    # see documentation in https://github.com/crisnao2/fake-smtp-server#configuration to args command
+    # command: --spring.config.location=/data/fakesmtp.properties uncomment line volume to mapped one file to container
+    # command: --fakesmtp.persistence.maxNumberEmails=25 # to change config fakemail, see documentation to others
