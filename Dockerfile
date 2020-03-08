@@ -3,7 +3,7 @@ WORKDIR /data
 COPY ./ /data
 RUN apk add --no-cache git \
     && ./gradlew build \
-    && mv build/libs/data-1.4.0.jar build/libs/fake-smtp-server.jar
+    && find /data/build/libs/ -name '*.jar' -exec mv {} /data/build/libs/fake-smtp-server.jar \;
 
 FROM adoptopenjdk/openjdk11:x86_64-alpine-jdk-11.0.5_10
 COPY --from=toBuildFakeMail /data/build/libs/fake-smtp-server.jar /opt/fake-smtp-server.jar
