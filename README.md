@@ -66,3 +66,22 @@ The following snippet shows the pre-defined web application configuration
     
     #Port of the http management api
     management.port=5081 
+
+## Run
+
+    # To run with default config
+    docker run --rm -p '5080:5080' -p '5081:5081' -p '5025:5025' crisnao2/fake-smtp-server
+
+    # To run by changing the maximum amount of email
+    # To more parameters, see documentation in https://github.com/crisnao2/fake-smtp-server#configuration
+    docker run --rm -p '5080:5080' -p '5081:5081' -p '5025:5025' crisnao2/fake-smtp-server --fakesmtp.persistence.maxNumberEmails=25
+
+    # To run using config file fakesmtp.properties, for others, change path and/or name
+    # To changer parameters in file, see documentation in https://github.com/crisnao2/fake-smtp-server#configuration
+    docker run --rm -p '5080:5080' -v $PWD:/data -p '5081:5081' -p '5025:5025' crisnao2/fake-smtp-server --spring.config.location=/data/fakesmtp.properties
+
+    # To run using docker-compose
+    # To changer parameters in attribute command, see documentation in https://github.com/crisnao2/fake-smtp-server#configuration
+    # To use config file in docker-compose, uncomment line volume and command in file docker-compose.yml
+    docker-compose up
+    docker-compose up -d # to run in background
